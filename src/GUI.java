@@ -21,6 +21,7 @@ public class GUI {
 	private TextField din,cant;
 	private JButton boton1,boton2,boton3;
 	private ImageIcon Titulo;
+	private ImageIcon Pesos;
 	private ImageIcon desv;
 	private Garage gara;
 	private JPanel[][] estacionamientoImgs = new JPanel[1][15];
@@ -148,47 +149,48 @@ public class GUI {
 
 		pie=new JPanel();
 		pie.setLayout(null);
-		pie.setBackground(new Color(0,162,232));
-		pie.setBounds(0,565,985,134);
+		pie.setBackground(new Color(0, 162, 232));
+		pie.setBounds(0, 565, 985, 134);
 
 		boton1=new JButton("Agregar Auto");
 		boton1.setBounds(300, 15, 110, 30);
-		boton1.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				agregar=new JFrame("Agregar");
+		boton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				agregar = new JFrame("Agregar");
 				agregar.setBounds(500, 300, 500, 200);
-				agregar.getContentPane().setBackground(new Color(0,162,232));
+				agregar.getContentPane().setBackground(new Color(0, 162, 232));
 
 				agregar.setLayout(null);
 
-				desv=new ImageIcon(getClass().getResource("Imagenes/DD.png"));
-				DD=new JLabel();
+				desv = new ImageIcon(getClass().getResource("Imagenes/DD.png"));
+				DD = new JLabel();
 				DD.setIcon(desv);
-				DD.setBounds(0,-15, 100, 100);
+				DD.setBounds(0, -15, 100, 100);
 
-				mod= new JLabel ("Modelo:",SwingConstants.CENTER);
-				mod.setBounds(65,15,100,50);
+				mod = new JLabel("Modelo:", SwingConstants.CENTER);
+				mod.setBounds(65, 15, 100, 50);
 
-				modelo=new TextField(10);
+				modelo = new TextField(10);
 				modelo.setBounds(165, 25, 200, 30);
 
-				pat= new JLabel ("Patente:",SwingConstants.CENTER);
-				pat.setBounds(65,70,100,50);
+				pat = new JLabel("Patente:", SwingConstants.CENTER);
+				pat.setBounds(65, 70, 100, 50);
 
-				patente=new TextField(10);
+				patente = new TextField(10);
 				patente.setBounds(165, 80, 200, 30);
 
-				bot=new JButton("Agregar");
-				bot.setBounds(165,120,200,30);
-				bot.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){
-						if(patente.getText().compareTo("")!=0 && modelo.getText().compareTo("")!=0){
-							gara.ingresarAuto(new Auto(modelo.getText(),patente.getText()));
-							din.setText(""+gara.dineroRecaudado());
-							cant.setText(""+gara.cantidadAutos());
+				bot = new JButton("Agregar");
+				bot.setBounds(165, 120, 200, 30);
+				bot.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (patente.getText().compareTo("") != 0 && modelo.getText().compareTo("") != 0) {
+							gara.ingresarAuto(new Auto(modelo.getText(), patente.getText()));
+							din.setText("" + gara.dineroRecaudado());
+							cant.setText("" + gara.cantidadAutos());
 							agregar.dispose();
 						}
-						}});
+					}
+				});
 
 
 				agregar.add(mod);
@@ -199,39 +201,41 @@ public class GUI {
 				agregar.add(DD);
 
 				agregar.setVisible(true);
-				}});
+			}
+		});
 
 		boton2=new JButton("Sacar Auto");
 		boton2.setBounds(570, 15, 110, 30);
-		boton2.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				sacar=new JFrame("Agregar");
+		boton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sacar = new JFrame("Agregar");
 				sacar.setBounds(500, 300, 500, 200);
-				sacar.getContentPane().setBackground(new Color(0,162,232));
+				sacar.getContentPane().setBackground(new Color(0, 162, 232));
 
 				sacar.setLayout(null);
 
-				desv=new ImageIcon(getClass().getResource("Imagenes/DD.png"));
-				DD=new JLabel();
+				desv = new ImageIcon(getClass().getResource("Imagenes/DD.png"));
+				DD = new JLabel();
 				DD.setIcon(desv);
-				DD.setBounds(0,-15, 100, 100);
+				DD.setBounds(0, -15, 100, 100);
 
-				pat1= new JLabel ("Patente:",SwingConstants.CENTER);
-				pat1.setBounds(65,40,100,50);
+				pat1 = new JLabel("Patente:", SwingConstants.CENTER);
+				pat1.setBounds(65, 40, 100, 50);
 
-				patente1=new TextField(10);
+				patente1 = new TextField(10);
 				patente1.setBounds(165, 50, 200, 30);
 
-				bot1=new JButton("Sacar");
-				bot1.setBounds(165,120,200,30);
-				bot1.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){
-						if(patente1.getText().compareTo("")!=0){
+				bot1 = new JButton("Sacar");
+				bot1.setBounds(165, 120, 200, 30);
+				bot1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (patente1.getText().compareTo("") != 0) {
 							gara.sacarAuto(patente1.getText());
-							cant.setText(""+gara.cantidadAutos());
+							cant.setText("" + gara.cantidadAutos());
 							sacar.dispose();
 						}
-						}});
+					}
+				});
 
 				sacar.add(pat1);
 				sacar.add(patente1);
@@ -239,10 +243,15 @@ public class GUI {
 				sacar.add(DD);
 
 				sacar.setVisible(true);
-				}});
+			}
+		});
 
 		dinero=new JLabel("Dinero Recaudado",SwingConstants.CENTER);
-		dinero.setBounds(190, 40, 110, 50);
+		Pesos=new ImageIcon(getClass().getResource("Imagenes/pesos.png"));
+		dinero.setIcon(Pesos);
+		dinero.setBounds(130, 40, 180, 50);
+
+
 
 		din=new TextField(10);
 		din.setBounds(315, 50,80, 30);
