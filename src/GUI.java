@@ -30,14 +30,16 @@ public class GUI {
 		ventana=new JFrame("Estacionamiento");
 		ventana.setBounds(250, 50, 1000, 700);
 		ventana.setDefaultCloseOperation(ventana.EXIT_ON_CLOSE);
-		ventana.getContentPane().setBackground(new Color(0,162,232));
+		ventana.getContentPane().setBackground(new Color(0, 162, 232));
 
 		ventana.setLayout(null);
 
 		cabecera=new JPanel();
 		cabecera.setLayout(new FlowLayout());
 		cabecera.setBackground(new Color(0,162,232));
-		Titulo=new ImageIcon("C:\\Users\\Martin\\workspace\\Garage Pila\\titulo.png");
+		System.out.println(getClass().getResource("titulo.png"));
+		//Titulo=new ImageIcon(getClass().getResource("titulo.png"));
+		Titulo=new ImageIcon("C://");
 		titulo1=new JLabel();
 		titulo1.setIcon(Titulo);
 		cabecera.add(titulo1);
