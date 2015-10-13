@@ -37,9 +37,7 @@ public class GUI {
 		cabecera=new JPanel();
 		cabecera.setLayout(new FlowLayout());
 		cabecera.setBackground(new Color(0,162,232));
-		System.out.println(getClass().getResource("titulo.png"));
-		//Titulo=new ImageIcon(getClass().getResource("titulo.png"));
-		Titulo=new ImageIcon("C://");
+		Titulo=new ImageIcon(getClass().getResource("Imagenes/titulo.png"));
 		titulo1=new JLabel();
 		titulo1.setIcon(Titulo);
 		cabecera.add(titulo1);
@@ -74,7 +72,7 @@ public class GUI {
 			estacionamiento.add(estacionamientoImgs[0][n]);
 		}
 
-		for(int i=0; i<5;i++) {
+		for(int i=0; i<15;i++) {
 			/*ImagePanel autito = new ImagePanel();
 			Image im;
 			try {
@@ -85,7 +83,7 @@ public class GUI {
 			}
 			autito.setBackground(im);
 			estacionamiento.add(autito);*/
-			ImageIcon autito=new ImageIcon("C:\\Users\\BB185046\\Desktop\\cochesitos\\1.png");
+			ImageIcon autito=new ImageIcon(getClass().getResource("Imagenes/cochesitos/1.png"));
 			JLabel autitoLbl=new JLabel();
 			autitoLbl.setIcon(autito);
 			//estacionamiento.add(autitoLbl);
@@ -158,7 +156,7 @@ public class GUI {
 
 				agregar.setLayout(null);
 
-				desv=new ImageIcon("C:\\Users\\Martin\\workspace\\Garage Pila\\DD.png");
+				desv=new ImageIcon(getClass().getResource("Imagenes/DD.png"));
 				DD=new JLabel();
 				DD.setIcon(desv);
 				DD.setBounds(0,-15, 100, 100);
@@ -208,7 +206,7 @@ public class GUI {
 
 				sacar.setLayout(null);
 
-				desv=new ImageIcon("C:\\Users\\Martin\\workspace\\Garage Pila\\DD.png");
+				desv=new ImageIcon(getClass().getResource("Imagenes/DD.png"));
 				DD=new JLabel();
 				DD.setIcon(desv);
 				DD.setBounds(0,-15, 100, 100);
