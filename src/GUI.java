@@ -31,6 +31,11 @@ public class GUI {
 		ventana.setBounds(250, 50, 1000, 700);
 		ventana.setDefaultCloseOperation(ventana.EXIT_ON_CLOSE);
 		ventana.getContentPane().setBackground(new Color(0, 162, 232));
+		Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Imagenes/DD2.png"));
+		ventana.setIconImage(icon);
+
+
+
 
 		ventana.setLayout(null);
 
