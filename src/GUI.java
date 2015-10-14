@@ -24,7 +24,9 @@ public class GUI {
 	private ImageIcon Pesos;
 	private ImageIcon desv;
 	private Garage gara;
-	private JPanel[][] estacionamientoImgs = new JPanel[1][15];
+	private JPanel[] estacionamientoImgs = new JPanel[6];
+	private JPanel[] esperaImgs = new JPanel[2];
+	private JPanel[] auxImgs = new JPanel[5];
 
 	public GUI(){
 		gara=new Garage();
@@ -34,9 +36,6 @@ public class GUI {
 		ventana.getContentPane().setBackground(new Color(0, 162, 232));
 		Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Imagenes/DD2.png"));
 		ventana.setIconImage(icon);
-
-
-
 
 		ventana.setLayout(null);
 
@@ -49,10 +48,9 @@ public class GUI {
 		cabecera.add(titulo1);
 		cabecera.setBounds(0,0,1000,200);
 
-
 		cuerpo=new JPanel();
 		cuerpo.setLayout(null);
-		cuerpo.setBackground(new Color(0,162,232));
+		cuerpo.setBackground(new Color(0, 162, 232));
 		cuerpo.setBounds(0,200,985,365);
 
 		/*cuerpo1=new JPanel();
@@ -62,48 +60,33 @@ public class GUI {
 		esta=new JLabel("Estacionamiento",SwingConstants.CENTER);
 		esta.setBounds(440, 0, 100, 50);
 		estacionamiento=new JPanel();
-		estacionamiento.setLayout(new GridLayout(1,15));
+		estacionamiento.setLayout(new GridLayout(1, 6));
 		estacionamiento.setBorder(BorderFactory.createMatteBorder(
-                4, 4, 4, 4, Color.green));;
-		estacionamiento.setBackground(new Color(0,162,232));
+				4, 4, 4, 4, Color.green));
+		estacionamiento.setBackground(new Color(53,53,53));
 
 		estacionamiento.setBounds(0, 50, 985, 70);
 		/*cuerpo.add(esta);
 		cuerpo.add(estacionamiento);*/
 
 
-
-		for(int n = 0; n < 15; n++) {
-			estacionamientoImgs[0][n] = new JPanel();
-			estacionamiento.add(estacionamientoImgs[0][n]);
+		for(int n = 0; n < 6; n++) {
+			estacionamientoImgs[n] = new JPanel();
+			estacionamientoImgs[n].setBackground(new Color(53, 53, 53));
+			estacionamiento.add(estacionamientoImgs[n]);
 		}
 
-		for(int i=0; i<15;i++) {
-			/*ImagePanel autito = new ImagePanel();
-			Image im;
+		for(int i=0; i<6;i++) {
 			try {
-				im = ImageIO.read(new File("C:\\Users\\BB185046\\Desktop\\cochesitos\\1.png"));
-			} catch (IOException iox) {
-				System.out.println("Error de IO: " + iox.getMessage());
-				im = null;
+				this.addEstAutos(i, i);
 			}
-			autito.setBackground(im);
-			estacionamiento.add(autito);*/
-			ImageIcon autito=new ImageIcon(getClass().getResource("Imagenes/cochesitos/1.png"));
-			JLabel autitoLbl=new JLabel();
-			autitoLbl.setIcon(autito);
-			//estacionamiento.add(autitoLbl);
-			this.addEstAutos(i,autitoLbl);
+			catch(Exception e){
+				System.out.println(e.getMessage());
+			}
 		}
 
 		cuerpo.add(esta);
 		cuerpo.add(estacionamiento);
-		//cuerpo1.add(esta);
-		//cuerpo1.add(estacionamiento);
-
-		/*cuerpo2=new JPanel();
-		cuerpo2.setLayout(new GridLayout(2,1));
-		cuerpo2.setBackground(new Color(0,162,232));*/
 
 		espe=new JLabel("Espera",SwingConstants.CENTER);
 		espe.setBounds(440, 120, 100, 50);
@@ -131,7 +114,7 @@ public class GUI {
 		au.setBounds(440, 240, 100, 50);
 
 		aux=new JPanel();
-		aux.setLayout(new GridLayout(1,15));
+		aux.setLayout(new GridLayout(1,2));
 		aux.setBorder(BorderFactory.createMatteBorder(
                 4, 4, 4, 4, Color.red));
 		aux.setBackground(new Color(0,162,232));
@@ -208,7 +191,7 @@ public class GUI {
 		boton2.setBounds(570, 15, 110, 30);
 		boton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sacar = new JFrame("Agregar");
+				sacar = new JFrame("Sacar");
 				sacar.setBounds(500, 300, 500, 200);
 				sacar.getContentPane().setBackground(new Color(0, 162, 232));
 
@@ -278,8 +261,12 @@ public class GUI {
 		ventana.add(pie);
 		ventana.setVisible(true);
 	}
-	public void addEstAutos(int idx, JLabel data){
-		estacionamientoImgs[0][idx].removeAll();
-		estacionamientoImgs[0][idx].add(data);
+	public void addEstAutos(int idx, int auto){
+		estacionamientoImgs[idx].removeAll();
+		ImageIcon autito = new ImageIcon(getClass().getResource("Imagenes/cochesitos/" + auto + ".png"));
+		JLabel autitoLbl = new JLabel();
+		autitoLbl.setBackground(new Color(53,53,53));
+		autitoLbl.setIcon(autito);
+		estacionamientoImgs[idx].add(autitoLbl);
 	}
 }

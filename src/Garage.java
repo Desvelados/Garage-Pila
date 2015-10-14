@@ -7,15 +7,15 @@ public class Garage {
 	private double recaudacion=0.0;
 	
 	public Garage(){
-		Estacionamiento= new PilaEstatica(15);
-		aux=new PilaEstatica(14);
-		Espera=new Cola(5);
+		Estacionamiento= new PilaEstatica(6);
+		aux=new PilaEstatica(5);
+		Espera=new Cola(2);
 	}
 	
 	public void ingresarAuto(Auto auto){
-		if(Estacionamiento.getSize()==15)
+		if(Estacionamiento.getSize()==6)
 		{
-			if(Espera.cantidad()==5){
+			if(Espera.cantidad()==2){
 				System.out.println("No hay Lugar");
 			}
 			else 
