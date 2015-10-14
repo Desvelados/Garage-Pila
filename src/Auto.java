@@ -1,10 +1,11 @@
 
 public class Auto {
 	private String patente,modelo;
-	
-	public Auto(String mod,String pat){
+	public int color;
+	public Auto(String mod,String pat, int col){
 		modelo=mod;
 		patente=pat;
+		color=col;
 	}
 
 	public String getPatente() {

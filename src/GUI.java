@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import sun.audio.*;
+import java.util.Random;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.swing.*;
@@ -27,6 +28,7 @@ public class GUI {
 	private JPanel[] estacionamientoImgs = new JPanel[6];
 	private JPanel[] esperaImgs = new JPanel[2];
 	private JPanel[] auxImgs = new JPanel[5];
+	private GUI context;
 
 	public GUI(){
 		gara=new Garage();
@@ -76,14 +78,14 @@ public class GUI {
 			estacionamiento.add(estacionamientoImgs[n]);
 		}
 
-		for(int i=0; i<6;i++) {
+		/*for(int i=0; i<6;i++) {
 			try {
 				this.addEstAutos(i, i);
 			}
 			catch(Exception e){
 				System.out.println(e.getMessage());
 			}
-		}
+		}*/
 
 		cuerpo.add(esta);
 		cuerpo.add(estacionamiento);
@@ -92,10 +94,17 @@ public class GUI {
 		espe.setBounds(440, 120, 100, 50);
 
 		espera=new JPanel();
-		espera.setLayout(new GridLayout(1,5));
+		espera.setLayout(new GridLayout(1,2));
 		espera.setBorder(BorderFactory.createMatteBorder(
                 4, 4, 4, 4, Color.yellow));
-		espera.setBackground(new Color(0,162,232));
+		espera.setBackground(new Color(53,53,53));
+
+		for(int n = 0; n < 2; n++) {
+			esperaImgs[n] = new JPanel();
+			esperaImgs[n].setBackground(new Color(53, 53, 53));
+			espera.add(esperaImgs[n]);
+		}
+
 
 		espera.setBounds(310, 170, 350, 70);
 
@@ -114,12 +123,18 @@ public class GUI {
 		au.setBounds(440, 240, 100, 50);
 
 		aux=new JPanel();
-		aux.setLayout(new GridLayout(1,2));
+		aux.setLayout(new GridLayout(1,5));
 		aux.setBorder(BorderFactory.createMatteBorder(
                 4, 4, 4, 4, Color.red));
-		aux.setBackground(new Color(0,162,232));
+		aux.setBackground(new Color(53,53,53));
 
 		aux.setBounds(0, 290, 985, 70);
+
+		for(int n = 0; n < 5; n++) {
+			auxImgs[n] = new JPanel();
+			auxImgs[n].setBackground(new Color(53, 53, 53));
+			aux.add(auxImgs[n]);
+		}
 
 		cuerpo.add(au);
 		cuerpo.add(aux);
@@ -167,7 +182,9 @@ public class GUI {
 				bot.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (patente.getText().compareTo("") != 0 && modelo.getText().compareTo("") != 0) {
-							gara.ingresarAuto(new Auto(modelo.getText(), patente.getText()));
+							Random rnd = new Random();
+							int color = rnd.nextInt(5) + 1;
+							gara.ingresarAuto(new Auto(modelo.getText(), patente.getText(), color), context);
 							din.setText("" + gara.dineroRecaudado());
 							cant.setText("" + gara.cantidadAutos());
 							agregar.dispose();
@@ -213,7 +230,7 @@ public class GUI {
 				bot1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (patente1.getText().compareTo("") != 0) {
-							gara.sacarAuto(patente1.getText());
+							gara.sacarAuto(patente1.getText(), context);
 							cant.setText("" + gara.cantidadAutos());
 							sacar.dispose();
 						}
@@ -239,7 +256,7 @@ public class GUI {
 		din=new TextField(10);
 		din.setBounds(315, 50,80, 30);
 		din.setEditable(false);
-		din.setText(""+gara.dineroRecaudado());
+		din.setText("" + gara.dineroRecaudado());
 
 		cantidad=new JLabel("Cantidad de Autos",SwingConstants.CENTER);
 		cantidad.setBounds(460, 40, 110, 50);
@@ -247,7 +264,7 @@ public class GUI {
 		cant=new TextField(10);
 		cant.setBounds(585, 50,80, 30);
 		cant.setEditable(false);
-		cant.setText(""+gara.cantidadAutos());
+		cant.setText("" + gara.cantidadAutos());
 
 		pie.add(boton1);
 		pie.add(boton2);
@@ -260,13 +277,55 @@ public class GUI {
 		ventana.add(cuerpo);
 		ventana.add(pie);
 		ventana.setVisible(true);
+
+		context = this;
 	}
 	public void addEstAutos(int idx, int auto){
 		estacionamientoImgs[idx].removeAll();
-		ImageIcon autito = new ImageIcon(getClass().getResource("Imagenes/cochesitos/" + auto + ".png"));
-		JLabel autitoLbl = new JLabel();
-		autitoLbl.setBackground(new Color(53,53,53));
-		autitoLbl.setIcon(autito);
+		JLabel autitoLbl;
+		if(auto!=-1) {
+			ImageIcon autito = new ImageIcon(getClass().getResource("Imagenes/cochesitos/" + auto + ".png"));
+			autitoLbl = new JLabel();
+			autitoLbl.setBackground(new Color(53, 53, 53));
+			autitoLbl.setIcon(autito);
+		}
+		else {
+			autitoLbl = new JLabel();
+		}
 		estacionamientoImgs[idx].add(autitoLbl);
+		estacionamiento.revalidate();
+		estacionamiento.repaint();
+	}
+	public void addAux(int idx, int auto){
+		auxImgs[idx].removeAll();
+		JLabel autitoLbl;
+		if(auto!=-1) {
+			ImageIcon autito = new ImageIcon(getClass().getResource("Imagenes/cochesitos/" + auto + ".png"));
+			autitoLbl = new JLabel();
+			autitoLbl.setBackground(new Color(53, 53, 53));
+			autitoLbl.setIcon(autito);
+		}
+		else {
+			autitoLbl = new JLabel();
+		}
+		auxImgs[idx].add(autitoLbl);
+		aux.revalidate();
+		aux.repaint();
+	}
+	public void addEspera(int idx, int auto){
+		esperaImgs[idx].removeAll();
+		JLabel autitoLbl;
+		if(auto!=-1) {
+			ImageIcon autito = new ImageIcon(getClass().getResource("Imagenes/cochesitos/" + auto + ".png"));
+			autitoLbl = new JLabel();
+			autitoLbl.setBackground(new Color(53, 53, 53));
+			autitoLbl.setIcon(autito);
+		}
+		else {
+			autitoLbl = new JLabel();
+		}
+		esperaImgs[idx].add(autitoLbl);
+		espera.revalidate();
+		espera.repaint();
 	}
 }
