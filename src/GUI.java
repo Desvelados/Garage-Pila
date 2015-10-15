@@ -2,11 +2,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+
 import sun.audio.*;
+
 import java.util.Random;
 
 import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 
@@ -187,6 +194,13 @@ public class GUI {
 							gara.ingresarAuto(new Auto(modelo.getText(), patente.getText(), color), context);
 							din.setText("" + gara.dineroRecaudado());
 							cant.setText("" + gara.cantidadAutos());
+							
+							
+							try{sonido2();
+							}
+							catch(Exception es){}
+							
+							
 							agregar.dispose();
 						}
 					}
@@ -232,6 +246,12 @@ public class GUI {
 						if (patente1.getText().compareTo("") != 0) {
 							gara.sacarAuto(patente1.getText(), context);
 							cant.setText("" + gara.cantidadAutos());
+							
+							
+							try{sonido();
+							}
+							catch(Exception es){}
+							
 							sacar.dispose();
 						}
 					}
@@ -327,5 +347,17 @@ public class GUI {
 		esperaImgs[idx].add(autitoLbl);
 		espera.revalidate();
 		espera.repaint();
+	}
+	
+	
+	public void sonido() throws LineUnavailableException, IOException, UnsupportedAudioFileException{
+		Clip sonido=AudioSystem.getClip();
+		sonido.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("Sonido/Claxon.wav")));
+		sonido.start();
+	}
+	public void sonido2() throws LineUnavailableException, IOException, UnsupportedAudioFileException{
+		Clip sonido=AudioSystem.getClip();
+		sonido.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("Sonido/Caja.wav")));
+		sonido.start();
 	}
 }
